@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim - OMÜ Öğrenci Platformu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="pages.css">
+</head>
+
+<body class="page-secondary page-iletisim">
+
+    <!-- Navbar -->
+    <nav class="page-navbar">
+        <a href="index.html" class="logo">OMÜ ÖĞRENCİ FORUMU</a>
+
+        <!-- Profil Widget / Auth Controls -->
+        <div class="nav-actions">
+            <div id="user-widget" class="widget-container" title="Profile git">
+                <div id="widget-avatar-wrap"></div>
+                <span id="widget-name" class="widget-name-text"></span>
+                <button id="widget-logout" class="widget-logout-btn" type="button" title="Çıkış Yap">Çıkış</button>
+            </div>
+
+            <button class="btn-login-nav" id="nav-login-btn">Giriş Yap</button>
+
+            <a href="Forum.html" class="btn-return">Foruma Dön</a>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <main class="page-container" style="max-width: 800px;">
+        <h1 class="page-title primary">Bize Ulaşın</h1>
+        <p class="page-subtitle">Aşağıdaki sosyal medya hesaplarımızı ve iletişim kanallarımızı sizin için hazırladık.
+            İleride kendi bilgilerinizi doldurarak dilediğiniz gibi güncelleyebilirsiniz!</p>
+
+        <div class="social-grid">
+            <!-- Instagram -->
+            <a href="https://instagram.com/ornek_hesap" target="_blank" class="social-card card-ig">
+                <div class="social-icon"><img src="icon/instagram.png" alt="Instagram"></div>
+                <div class="social-info">
+                    <h3>Instagram</h3>
+                    <p>@ornek_hesap (Linkinizi Buraya Girin)</p>
+                </div>
+            </a>
+
+            <!-- Twitter / X -->
+            <a href="https://twitter.com/ornek_hesap" target="_blank" class="social-card card-x">
+                <div class="social-icon"><img src="icon/x.png" alt="X"></div>
+                <div class="social-info">
+                    <h3>Twitter / X</h3>
+                    <p>@ornek_hesap (Linkinizi Buraya Girin)</p>
+                </div>
+            </a>
+
+            <!-- Facebook -->
+            <a href="https://facebook.com/ornek.sayfa" target="_blank" class="social-card card-fb">
+                <div class="social-icon"><img src="icon/facebook.png" alt="Facebook"></div>
+                <div class="social-info">
+                    <h3>Facebook</h3>
+                    <p>/ornek.sayfa (Linkinizi Buraya Girin)</p>
+                </div>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://linkedin.com/in/ornek_profil" target="_blank" class="social-card card-in">
+                <div class="social-icon"><img src="icon/linkedin.png" alt="LinkedIn"></div>
+                <div class="social-info">
+                    <h3>LinkedIn</h3>
+                    <p>ornek_profil (Linkinizi Buraya Girin)</p>
+                </div>
+            </a>
+
+            <!-- E-Mail -->
+            <a href="mailto:ornekmail@gmail.com" class="social-card card-mail">
+                <div class="social-icon"><img src="icon/gmail.png" alt="Gmail"></div>
+                <div class="social-info">
+                    <h3>G-Mail</h3>
+                    <p>ornekmail@gmail.com</p>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footer-text">&copy; 2026 Omü Öğrenci Forum & Staj Platformu. Tüm hakları saklıdır.</p>
+    </footer>
+
+    <!-- Supabase CDN -->
+    <script src=""></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMÜ Öğrenci ve Staj Forumu</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+</head>
+
+<body class="page-forum">
+
+    <header>
+        <div class="container header-container">
+            <h1 class="logo">Omü Öğrenci Forum</h1>
+
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Forumda konu ara..." onkeyup="searchForum()">
+                <button type="button" onclick="searchForum()">Ara</button>
+            </div>
+
+            <nav>
+                <a href="http://omuforum.gt.tc/index.html">Ana Sayfa</a>
+
+                <div class="dropdown">
+                    <button class="dropbtn">Yardım</button>
+                    <div class="dropdown-content">
+                        <a href="http://omuforum.gt.tc/rules.html">Kurallar</a>
+                        <a href="http://omuforum.gt.tc/iletisim.html">İletişim</a>
+                    </div>
+                </div>
+                <a href="http://omuforum.gt.tc/staj.html">Staj İlanları</a>
+
+
+                <!-- Profil Widget -->
+                <div id="user-widget" title="Profile git">
+                    <div id="widget-avatar-wrap"></div>
+                    <span id="widget-name"></span>
+                    <span class="online-dot"></span>
+                    <button id="widget-logout" type="button" title="Çıkış Yap">Çıkış</button>
+                </div>
+
+                <!-- Oturum yoksa görünen buton -->
+                <button class="login-btn" id="nav-login-btn" onclick="window.location.href='login.html'">Giriş
+                    Yap</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="new-entry-section">
+            <button class="toggle-btn" onclick="toggleEntryForm()">+ Yeni Konu Aç</button>
+
+            <div id="entryForm" class="entry-form-container" style="display: none;">
+                <h3>Yeni Başlık Oluştur</h3>
+                <form action="#" onsubmit="event.preventDefault(); addEntry();">
+                    <input type="text" id="entryTitle" placeholder="Konu Başlığı" required>
+                    <textarea id="entryMessage" rows="5" placeholder="Mesajınızı buraya yazın..." required></textarea>
+                    <div id="form-error" class="error-msg">Lütfen tüm alanları doldurun!</div>
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn" id="submit-btn">Gönder</button>
+                        <button type="button" class="cancel-btn" onclick="toggleEntryForm()">İptal</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section class="forum-category" id="forumList">
+            <h2 class="category-title">Genel Öğrenci Forumu</h2>
+
+            <div class="forum-row header-row">
+                <div class="forum-info">Forum</div>
+                <div class="forum-stats">İstatistikler</div>
+                <div class="forum-last-post">Son Mesaj</div>
+            </div>
+
+            <div id="loading-indicator" class="active">⏳ Konular yükleniyor...</div>
+            <div id="empty-message">Henüz hiç konu açılmamış. İlk konuyu sen aç! 🚀</div>
+
+            <!-- Konular buraya dinamik eklenir -->
+            <div id="topics-container"></div>
+        </section>
+    </main>
+
+    <!-- Supabase CDN -->
+    <script src="   "></script>
+
+
+    <script src="app.js"></script>
+</body>
+
+</html>

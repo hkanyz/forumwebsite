@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Kayıt Ol - OMÜ Öğrenci Platformu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-auth">
+    <div class="bg-deco"></div>
+
+    <div class="card">
+        <!-- Avatar -->
+        <div class="avatar-wrap">
+            <div class="avatar-btn" id="avatarbtn" title="Profil fotoğrafı seç">
+                <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                <img id="avatar-img" alt="Önizleme" />
+                <span class="avatar-label">Foto Seç</span>
+            </div>
+        </div>
+        <input type="file" id="file-input" accept="image/*" style="display:none" />
+
+        <!-- Başlık -->
+        <div class="card-title">
+            <h1>Hesap Oluştur</h1>
+            <p>Sohbete katılmak için bilgilerini gir</p>
+        </div>
+
+        <!-- Alert -->
+        <div class="alert" id="alert"></div>
+
+        <!-- Form Alanları -->
+        <div class="field">
+            <label for="inp-username">Kullanıcı Adı (Nickname)</label>
+            <input type="text" id="inp-username" placeholder="Görünecek adınız" minlength="3" maxlength="20" autocomplete="off" />
+        </div>
+        <div class="field">
+            <label for="inp-email">E-posta Adresi</label>
+            <input type="email" id="inp-email" placeholder="ornek@mail.com" autocomplete="email" />
+        </div>
+        <div class="field">
+            <label for="inp-password">Şifre</label>
+            <input type="password" id="inp-password" placeholder="En az 6 karakter" autocomplete="new-password" />
+        </div>
+
+        <button class="btn-primary" id="register-btn" type="button">
+            <div class="spinner" id="spinner"></div>
+            <span id="btn-text">Kayıt Ol ve Başla</span>
+        </button>
+
+        <div class="footer-link">
+            Zaten hesabın var mı? <a href="login.html">Giriş Yap</a>
+        </div>
+    </div>
+
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <script src="app.js"></script>
+</body>
+</html>

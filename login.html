@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Giriş Yap - OMÜ Öğrenci Platformu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="page-auth">
+    <div class="bg-deco"></div>
+
+    <div class="card">
+        <!-- OTURUM AÇIK → Profil Kartı -->
+        <div id="profile-card">
+            <div id="profile-avatar-wrap"></div>
+            <div class="profile-info">
+                <div class="profile-name" id="profile-name">—</div>
+                <div class="profile-email" id="profile-email">—</div>
+            </div>
+            <span class="profile-badge">Çevrimiçi</span>
+        </div>
+        <button id="go-forum-btn" type="button">🚀 Foruma Git</button>
+        <button id="logout-btn" type="button">Çıkış Yap</button>
+
+        <!-- OTURUM KAPALI → Giriş Formu -->
+        <div id="login-section">
+            <div class="card-header">
+                <div class="icon-wrap">
+                    <svg width="28" height="28" fill="none" stroke="white" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                    </svg>
+                </div>
+                <h1>Hoş Geldiniz</h1>
+                <p>Devam etmek için giriş yapın</p>
+            </div>
+
+            <div class="alert" id="alert"></div>
+
+            <div class="field">
+                <div class="field-header">
+                    <label for="inp-email">E-posta Adresi</label>
+                </div>
+                <input type="email" id="inp-email" placeholder="ornek@mail.com" autocomplete="email" />
+            </div>
+
+            <div class="field">
+                <div class="field-header">
+                    <label for="inp-password">Şifre</label>
+                    <a href="#" class="forgot-link">Şifreni mi unuttun?</a>
+                </div>
+                <input type="password" id="inp-password" placeholder="••••••••" autocomplete="current-password" />
+            </div>
+
+            <button class="btn-primary" id="login-btn" type="button">
+                <div class="spinner" id="spinner"></div>
+                <span id="btn-text">Giriş Yap</span>
+            </button>
+
+            <div class="divider">veya</div>
+            <a href="register.html" class="btn-secondary">Hesap Oluştur</a>
+        </div>
+
+        <div class="footer-note">Supabase Altyapısı İle Güvende</div>
+    </div>
+
+    <script src="   "></script>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

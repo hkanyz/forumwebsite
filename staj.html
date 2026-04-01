@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staj İlanları - OMÜ Öğrenci ve Staj Forumu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="pages.css">
+</head>
+
+<body class="page-secondary page-staj">
+
+    <!-- Navbar -->
+    <nav class="page-navbar">
+        <a href="index.html" class="logo">OMÜ ÖĞRENCİ FORUMU</a>
+
+        <!-- Profil Widget / Auth Controls -->
+        <div class="nav-actions">
+            <div id="user-widget" class="widget-container" title="Profile git">
+                <div id="widget-avatar-wrap"></div>
+                <span id="widget-name" class="widget-name-text"></span>
+                <button id="widget-logout" class="widget-logout-btn" type="button" title="Çıkış Yap">Çıkış</button>
+            </div>
+
+            <button class="btn-login-nav" id="nav-login-btn">Giriş Yap</button>
+
+            <a href="Forum.html" class="btn-return">Foruma Dön</a>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <main class="page-container">
+        <h1 class="page-title secondary">Staj İlanı Panosu</h1>
+        <p class="page-subtitle">OMÜ öğrencileri için şirketinizdeki veya çevrenizdeki staj fırsatlarını
+            paylaşabilirsiniz.</p>
+
+        <button class="btn-toggle-action btn-toggle-internship">+ Yeni Staj İlanı Ekle</button>
+
+        <div id="internshipForm" class="entry-form-container" style="display: none;">
+            <h3>Yeni İlan Detayları</h3>
+            <form id="internship-form-el" action="#">
+                <input type="text" id="internshipTitle"
+                    placeholder="Şirket ve Pozisyon (Örn: Aselsan - Yazılım Stajyeri)" required>
+                <textarea id="internshipMessage" rows="4" placeholder="Aranan nitelikler, başvuru linki vb..."
+                    required></textarea>
+                <div id="internship-error" class="error-msg-box">Lütfen tüm alanları doldurun!</div>
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn" id="internship-submit-btn">İlanı Paylaş</button>
+                    <button type="button" class="cancel-btn btn-toggle-internship">İptal</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="loading-internships" class="status-msg-box">⏳ İlanlar yükleniyor...</div>
+        <div id="empty-internships" class="status-msg-box">Henüz staj ilanı bulunmuyor.</div>
+
+        <div id="internships-container">
+            <!-- İlanlar buraya dinamik olarak eklenecek -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footer-text">&copy; 2026 Omü Öğrenci Forum & Staj Platformu. Tüm hakları saklıdır.</p>
+    </footer>
+
+    <!-- Supabase CDN -->
+    <script src=" "></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
