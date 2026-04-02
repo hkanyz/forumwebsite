@@ -4,14 +4,14 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     // Sayfa Türlerini Belirle
-    const isIndex = document.body.classList.contains('page-index');
-    const isForum = document.body.classList.contains('page-forum');
-    const isAuth = document.body.classList.contains('page-auth');
-    const isStaj = document.body.classList.contains('page-staj');
-    const isIletisim = document.body.classList.contains('page-iletisim');
-
+    const isIndex   = document.body.classList.contains('page-index');
+    const isForum   = document.body.classList.contains('page-forum');
+    const isAuth    = document.body.classList.contains('page-auth');
+    const isStaj    = document.body.classList.contains('page-staj');
+    const isIletisim= document.body.classList.contains('page-iletisim');
+    
     // Auth Sayfalarındaki Formları Belirle
-    const isLoginForm = document.getElementById('login-btn') !== null;
+    const isLoginForm    = document.getElementById('login-btn') !== null;
     const isRegisterForm = document.getElementById('register-btn') !== null;
 
     // Sayfalar arası login yönlendirme butonları (satıriçi JS yerine EventListener)
@@ -40,8 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- 2. FORUM, STAJ & İLETİŞİM SAYFASI KODLARI (Auth Gerektirenler)
     // ==========================================
     if ((isForum || isStaj || isIletisim) && typeof window.supabase !== 'undefined') {
-        const SUPABASE_URL = '';
-        const SUPABASE_ANON = '';
+        const SUPABASE_URL  = 'https://rzcjhctreevbswoswpvv.supabase.co';
+        const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ6Y2poY3RyZWV2YnN3b3N3cHZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNjAzMzgsImV4cCI6MjA4ODkzNjMzOH0.cyvhofc_aF_iceJ8856mDntMp3Co4uOGS8dRSrJkkOw';
         const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
         let currentUsername = 'Kullanıcı';
@@ -63,11 +63,11 @@ document.addEventListener("DOMContentLoaded", () => {
             // Widget Gösterimi
             const widget = document.getElementById('user-widget');
             const navLoginBtn = document.getElementById('nav-login-btn');
-            if (navLoginBtn) navLoginBtn.style.display = 'none';
-            if (widget) widget.style.display = 'flex';
-
+            if(navLoginBtn) navLoginBtn.style.display = 'none';
+            if(widget) widget.style.display = 'flex';
+            
             const widgetName = document.getElementById('widget-name');
-            if (widgetName) widgetName.textContent = currentUsername;
+            if(widgetName) widgetName.textContent = currentUsername;
 
             const avatarWrap = document.getElementById('widget-avatar-wrap');
             if (avatarWrap) {
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const widgetLogout = document.getElementById('widget-logout');
-            if (widgetLogout) {
+            if(widgetLogout) {
                 widgetLogout.addEventListener('click', async (e) => {
                     e.stopPropagation();
                     await sb.auth.signOut();
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (isForum) await loadTopics();
             if (isStaj) {
                 await loadInternships();
-
+                
                 // HTML içinden silinen olay tetikleyicilerini ayarla
                 document.querySelectorAll('.btn-toggle-internship').forEach(btn => {
                     btn.addEventListener('click', window.toggleInternshipForm);
@@ -110,9 +110,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         async function loadTopics() {
             const loadingEl = document.getElementById('loading-indicator');
-            const emptyEl = document.getElementById('empty-message');
+            const emptyEl   = document.getElementById('empty-message');
             const container = document.getElementById('topics-container');
-            if (!container) return;
+            if(!container) return;
 
             loadingEl.classList.add('active');
             emptyEl.classList.remove('active');
@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="icon">📝</div>
                         <div>
                             <a href="#" class="forum-name">${escapeHtml(topic.title)}</a>
-                            <p class="forum-desc">${escapeHtml(topic.message)}</p>
+                            <p class="forum-desc">${escapeHtml(topic.message).replace(/\n/g, '<br>')}</p>
                             <p class="forum-author">Yazan: <span class="username">${escapeHtml(topic.author)}</span>, ${timeStr}</p>
                             <button class="comment-toggle-btn" onclick="window.toggleComments(this)">Yorumlar</button>
                         </div>
@@ -180,16 +180,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // --- GLOBAL FORUM FONKSİYONLARI ---
-        window.toggleEntryForm = function () {
+        window.toggleEntryForm = function() {
             const form = document.getElementById('entryForm');
-            if (form) {
+            if(form) {
                 form.style.display = form.style.display === 'none' ? 'block' : 'none';
                 document.getElementById('form-error').classList.remove('active');
             }
         };
 
-        window.addEntry = async function () {
-            const title = document.getElementById('entryTitle').value.trim();
+        window.addEntry = async function() {
+            const title   = document.getElementById('entryTitle').value.trim();
             const message = document.getElementById('entryMessage').value.trim();
             const errorEl = document.getElementById('form-error');
             const submitBtn = document.getElementById('submit-btn');
@@ -208,9 +208,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const { data, error } = await sb
                 .from('forum_topics')
                 .insert([{
-                    title: title,
+                    title:   title,
                     message: message,
-                    author: currentUsername
+                    author:  currentUsername
                 }])
                 .select()
                 .single();
@@ -225,12 +225,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            document.getElementById('entryTitle').value = '';
+            document.getElementById('entryTitle').value   = '';
             document.getElementById('entryMessage').value = '';
             window.toggleEntryForm();
 
             const container = document.getElementById('topics-container');
-            const emptyEl = document.getElementById('empty-message');
+            const emptyEl   = document.getElementById('empty-message');
             emptyEl.classList.remove('active');
 
             const tempContainer = document.createElement('div');
@@ -238,8 +238,8 @@ document.addEventListener("DOMContentLoaded", () => {
             container.insertBefore(tempContainer.firstChild, container.firstChild);
         };
 
-        window.toggleComments = async function (btn) {
-            const postContainer = btn.closest('.post-container');
+        window.toggleComments = async function(btn) {
+            const postContainer  = btn.closest('.post-container');
             const commentsSection = postContainer.querySelector('.comments-section');
             const isOpen = commentsSection.style.display !== 'none';
 
@@ -251,7 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         async function loadReplies(postContainer) {
-            const topicId = postContainer.dataset.topicId;
+            const topicId     = postContainer.dataset.topicId;
             const commentList = postContainer.querySelector('.comment-list');
             const commentsSection = postContainer.querySelector('.comments-section');
 
@@ -287,16 +287,16 @@ document.addEventListener("DOMContentLoaded", () => {
             div.className = 'comment-item';
             div.innerHTML = `
                 <div class="comment-meta"><span class="username">${escapeHtml(reply.author)}</span> — ${timeAgo(new Date(reply.created_at))}</div>
-                <div class="comment-text">${escapeHtml(reply.content)}</div>
+                <div class="comment-text">${escapeHtml(reply.content).replace(/\n/g, '<br>')}</div>
             `;
             commentList.appendChild(div);
         }
 
-        window.addComment = async function (btn) {
-            const input = btn.previousElementSibling;
-            const text = input.value.trim();
+        window.addComment = async function(btn) {
+            const input       = btn.previousElementSibling;
+            const text        = input.value.trim();
             const postContainer = btn.closest('.post-container');
-            const topicId = postContainer.dataset.topicId;
+            const topicId     = postContainer.dataset.topicId;
             const commentList = postContainer.querySelector('.comment-list');
 
             if (text === '') return;
@@ -308,8 +308,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 .from('forum_replies')
                 .insert([{
                     topic_id: topicId,
-                    content: text,
-                    author: currentUsername
+                    content:  text,
+                    author:   currentUsername
                 }])
                 .select()
                 .single();
@@ -335,15 +335,15 @@ document.addEventListener("DOMContentLoaded", () => {
             if (msgCount) msgCount.textContent = parseInt(msgCount.textContent || 0) + 1;
         };
 
-        window.searchForum = function () {
+        window.searchForum = function() {
             const searchInput = document.getElementById('searchInput');
-            if (!searchInput) return;
+            if(!searchInput) return;
             const query = searchInput.value.toLowerCase();
             const posts = document.querySelectorAll('.post-container');
 
             posts.forEach(post => {
                 const title = post.querySelector('.forum-name')?.innerText.toLowerCase() || '';
-                const desc = post.querySelector('.forum-desc')?.innerText.toLowerCase() || '';
+                const desc  = post.querySelector('.forum-desc')?.innerText.toLowerCase() || '';
                 post.style.display = (title.includes(query) || desc.includes(query)) ? '' : 'none';
             });
         };
@@ -351,16 +351,16 @@ document.addEventListener("DOMContentLoaded", () => {
         // ==================
         // STAJ İLANLARI FONKSİYONLARI
         // ==================
-        window.toggleInternshipForm = function () {
+        window.toggleInternshipForm = function() {
             const form = document.getElementById('internshipForm');
-            if (form) {
+            if(form) {
                 form.style.display = form.style.display === 'none' ? 'block' : 'none';
                 document.getElementById('internship-error').style.display = 'none';
             }
         };
 
-        window.addInternship = async function () {
-            const title = document.getElementById('internshipTitle').value.trim();
+        window.addInternship = async function() {
+            const title   = document.getElementById('internshipTitle').value.trim();
             const message = document.getElementById('internshipMessage').value.trim();
             const errorEl = document.getElementById('internship-error');
             const submitBtn = document.getElementById('internship-submit-btn');
@@ -379,9 +379,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const { data, error } = await sb
                 .from('staj_ilanlari')
                 .insert([{
-                    title: title,
+                    title:   title,
                     message: message,
-                    author: currentUsername
+                    author:  currentUsername
                 }])
                 .select()
                 .single();
@@ -396,12 +396,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            document.getElementById('internshipTitle').value = '';
+            document.getElementById('internshipTitle').value   = '';
             document.getElementById('internshipMessage').value = '';
             window.toggleInternshipForm();
 
             const container = document.getElementById('internships-container');
-            const emptyEl = document.getElementById('empty-internships');
+            const emptyEl   = document.getElementById('empty-internships');
             emptyEl.style.display = 'none';
 
             const tempContainer = document.createElement('div');
@@ -409,9 +409,9 @@ document.addEventListener("DOMContentLoaded", () => {
             container.insertBefore(tempContainer.firstChild, container.firstChild);
         };
 
-        window.deleteInternship = async function (btn, id) {
-            if (!confirm("İlanı silmek istediğinize emin misiniz?")) return;
-
+        window.deleteInternship = async function(btn, id) {
+            if(!confirm("İlanı silmek istediğinize emin misiniz?")) return;
+            
             btn.disabled = true;
             const originalText = btn.textContent;
             btn.textContent = 'Siliniyor...';
@@ -427,7 +427,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 btn.textContent = originalText;
             } else {
                 const item = btn.closest('.internship-item');
-                if (item) {
+                if(item) {
                     item.remove();
                 }
             }
@@ -435,9 +435,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         async function loadInternships() {
             const loadingEl = document.getElementById('loading-internships');
-            const emptyEl = document.getElementById('empty-internships');
+            const emptyEl   = document.getElementById('empty-internships');
             const container = document.getElementById('internships-container');
-            if (!container) return;
+            if(!container) return;
 
             loadingEl.style.display = 'block';
             emptyEl.style.display = 'none';
@@ -452,10 +452,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (error) {
                 if (error.code === '42P01') {
-                    // Table doesn't exist
-                    emptyEl.textContent = "⚠️ 'staj_ilanlari' veritabanı tablosu henüz mevcut değil. Hata 42P01: Relation staj_ilanlari does not exist.";
+                     // Table doesn't exist
+                     emptyEl.textContent = "⚠️ 'staj_ilanlari' veritabanı tablosu henüz mevcut değil. Hata 42P01: Relation staj_ilanlari does not exist.";
                 } else {
-                    emptyEl.textContent = '⚠️ İlanlar yüklenemedi: ' + error.message;
+                     emptyEl.textContent = '⚠️ İlanlar yüklenemedi: ' + error.message;
                 }
                 emptyEl.style.display = 'block';
                 return;
@@ -499,8 +499,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- 3. LOGIN SAYFASI KODLARI
     // ==========================================
     if (isAuth && isLoginForm && typeof window.supabase !== 'undefined') {
-        const SUPABASE_URL = '';
-        const SUPABASE_ANON = '';
+        const SUPABASE_URL  = 'https://rzcjhctreevbswoswpvv.supabase.co';
+        const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ6Y2poY3RyZWV2YnN3b3N3cHZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNjAzMzgsImV4cCI6MjA4ODkzNjMzOH0.cyvhofc_aF_iceJ8856mDntMp3Co4uOGS8dRSrJkkOw';
         const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
         function showAlert(msg, type) {
@@ -518,11 +518,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         function showProfileCard(user) {
-            const meta = user.user_metadata || {};
-            const username = meta.username || meta.full_name || user.email.split('@')[0];
-            const avatarUrl = meta.avatar_url || null;
+            const meta       = user.user_metadata || {};
+            const username   = meta.username || meta.full_name || user.email.split('@')[0];
+            const avatarUrl  = meta.avatar_url || null;
 
-            document.getElementById('profile-name').textContent = username;
+            document.getElementById('profile-name').textContent  = username;
             document.getElementById('profile-email').textContent = user.email;
 
             const wrap = document.getElementById('profile-avatar-wrap');
@@ -534,16 +534,16 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             document.getElementById('login-section').style.display = 'none';
-            document.getElementById('profile-card').style.display = 'flex';
-            document.getElementById('go-forum-btn').style.display = 'block';
-            document.getElementById('logout-btn').style.display = 'block';
+            document.getElementById('profile-card').style.display  = 'flex';
+            document.getElementById('go-forum-btn').style.display  = 'block';
+            document.getElementById('logout-btn').style.display    = 'block';
         }
 
         function showLoginForm() {
             document.getElementById('login-section').style.display = 'block';
-            document.getElementById('profile-card').style.display = 'none';
-            document.getElementById('go-forum-btn').style.display = 'none';
-            document.getElementById('logout-btn').style.display = 'none';
+            document.getElementById('profile-card').style.display  = 'none';
+            document.getElementById('go-forum-btn').style.display  = 'none';
+            document.getElementById('logout-btn').style.display    = 'none';
         }
 
         (async () => {
@@ -564,7 +564,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         document.getElementById('login-btn').addEventListener('click', async function () {
-            const email = document.getElementById('inp-email').value.trim();
+            const email    = document.getElementById('inp-email').value.trim();
             const password = document.getElementById('inp-password').value;
 
             if (!email || !email.includes('@')) { showAlert('Geçerli bir e-posta adresi girin.', 'error'); return; }
@@ -583,7 +583,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        document.addEventListener('keydown', function (e) {
+        document.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' && document.getElementById('login-section').style.display !== 'none') {
                 document.getElementById('login-btn').click();
             }
@@ -600,8 +600,8 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById('alert').style.display = 'block';
             document.getElementById('register-btn').disabled = true;
         } else {
-            const SUPABASE_URL = '';
-            const SUPABASE_ANON = '';
+            const SUPABASE_URL  = 'https://rzcjhctreevbswoswpvv.supabase.co';
+            const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ6Y2poY3RyZWV2YnN3b3N3cHZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNjAzMzgsImV4cCI6MjA4ODkzNjMzOH0.cyvhofc_aF_iceJ8856mDntMp3Co4uOGS8dRSrJkkOw';
             const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
             let selectedFile = null;
@@ -612,8 +612,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (btn && fileInput) {
                 btn.addEventListener('click', () => fileInput.click());
-
-                fileInput.addEventListener('change', function () {
+                
+                fileInput.addEventListener('change', function() {
                     if (fileInput.files && fileInput.files[0]) {
                         const file = fileInput.files[0];
                         if (file.size > 5 * 1024 * 1024) {
@@ -622,7 +622,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         }
                         selectedFile = file;
                         const reader = new FileReader();
-                        reader.onload = function (ev) {
+                        reader.onload = function(ev) {
                             img.src = ev.target.result;
                             img.style.display = 'block';
                             btn.querySelector('svg').style.display = 'none';
@@ -640,12 +640,12 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             function setLoading(loading) {
-                const btn = document.getElementById('register-btn');
+                const btn     = document.getElementById('register-btn');
                 const spinner = document.getElementById('spinner');
-                const txt = document.getElementById('btn-text');
-                btn.disabled = loading;
+                const txt     = document.getElementById('btn-text');
+                btn.disabled        = loading;
                 spinner.style.display = loading ? 'block' : 'none';
-                txt.textContent = loading ? 'İşleniyor...' : 'Kayıt Ol ve Başla';
+                txt.textContent     = loading ? 'İşleniyor...' : 'Kayıt Ol ve Başla';
             }
 
             function uniqueName(file) {
@@ -653,9 +653,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 return Math.random().toString(36).slice(2) + Date.now().toString(36) + '.' + ext;
             }
 
-            document.getElementById('register-btn').addEventListener('click', async function () {
+            document.getElementById('register-btn').addEventListener('click', async function() {
                 const username = document.getElementById('inp-username').value.trim();
-                const email = document.getElementById('inp-email').value.trim();
+                const email    = document.getElementById('inp-email').value.trim();
                 const password = document.getElementById('inp-password').value;
 
                 if (!username || username.length < 3) { showAlert('Kullanıcı adı en az 3 karakter olmalıdır.', 'error'); return; }
@@ -703,22 +703,37 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function timeAgo(date) {
-        const now = new Date();
+        const now   = new Date();
         const diffMs = now - date;
         const diffSec = Math.floor(diffMs / 1000);
         const diffMin = Math.floor(diffSec / 60);
-        const diffHr = Math.floor(diffMin / 60);
+        const diffHr  = Math.floor(diffMin / 60);
         const diffDay = Math.floor(diffHr / 24);
 
-        if (diffSec < 60) return 'az önce';
-        if (diffMin < 60) return `${diffMin} dk önce`;
-        if (diffHr < 24) return `${diffHr} saat önce`;
-        if (diffDay < 30) return `${diffDay} gün önce`;
+        if (diffSec < 60)  return 'az önce';
+        if (diffMin < 60)  return `${diffMin} dk önce`;
+        if (diffHr < 24)   return `${diffHr} saat önce`;
+        if (diffDay < 30)  return `${diffDay} gün önce`;
         return date.toLocaleDateString('tr-TR');
     }
 
     // Render fonksiyonları global window'a atanabilir.
     window.escapeHtml = escapeHtml;
     window.timeAgo = timeAgo;
+
+    // --- Otomatik Boyutlanan Metin Kutuları (Auto-resize textarea) ---
+    document.querySelectorAll('textarea').forEach(ta => {
+        ta.style.overflow = 'hidden'; // Scroll barı gizle
+        ta.style.resize = 'none'; // Kullanıcının elle boyutlandırmasını kapat
+        ta.style.minHeight = '120px'; // Form ilk açıldığında varsayılan bir yükseklik
+    });
+
+    // Kullanıcı bir şey yazdığında veya yapıştırdığında yüksekliği güncelle
+    document.addEventListener('input', function(e) {
+        if (e.target.tagName.toLowerCase() === 'textarea') {
+            e.target.style.height = 'auto'; // Kaydırma yüksekliğini doğru hesaplayabilmek için önce auto yap
+            e.target.style.height = (e.target.scrollHeight) + 'px'; // Kendi yüksekliğini içeriğin yüksekliğine (scrollHeight) eşitle
+        }
+    }, false);
 
 });
